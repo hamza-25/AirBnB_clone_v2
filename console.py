@@ -114,6 +114,16 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
+    def str_float_int(self, value):
+        try:
+            value = int(value)
+        except Exception:
+            try:
+                value = float(value)
+            except Exception:
+                pass
+        return (value)
+
     def args_split(self, args):
         """method that splite args in a list
         Return ditc that contain key value of args startin from first param
