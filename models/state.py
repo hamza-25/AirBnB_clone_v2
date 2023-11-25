@@ -16,3 +16,6 @@ class State(BaseModel, Base):
         name = Column(String(length=128), nullable=False)
         cities = relationship("City", backref='state',
                           cascade='all, delete')
+    def __init__(self, *args, **kwargs):
+        """init """
+        super().__init__(*args, **kwagrs)
