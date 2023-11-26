@@ -18,4 +18,4 @@ class State(BaseModel, Base):
                           cascade='all, delete')
     def __init__(self, *args, **kwargs):
         """init """
-        super().__init__(*args, **kwagrs)
+        super().__init__(*args, **kwargs)
