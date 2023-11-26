@@ -45,10 +45,11 @@ class DBStorage:
             instances = self.__session.query(cls).all()
             new_dict = {}
             for item in instances:
-                create_key = "{}.{}".format(cls.__name__, item.__dict__.id)
+                create_key = "{}.{}".format(cls.__name__, item.id)
                 # if '_sa_instance_state' in item.__dict__.keys():
                     # del item.__dict__['_sa_instance_state']
-                new_dict[create_key] = cls(**item)
+
+                new_dict[create_key] = str(item)
         else:
             models = [User, State, City, Amenity, Place, Review]
             new_dict = {}
@@ -58,7 +59,7 @@ class DBStorage:
                     create_key = "{}.{}".format(model.__name__, item.id)
                     # if '_sa_instance_state' in item.__dict__.keys():
                         # del item.__dict__['_sa_instance_state']
-                    new_dict[create_key] = model(**item)
+                    new_dict[create_key] = str(item)
         # self.__session.close()
         print (new_dict)
         exit(0)
