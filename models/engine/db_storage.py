@@ -17,13 +17,7 @@ class DBStorage:
     """DBStorage Class"""
     __engine = None
     __session = None
-    #user = getenv('HBNB_MYSQL_USER')
-    #pwd = getenv('HBNB_MYSQL_PWD')
-    #host = getenv('HBNB_MYSQL_HOST')
-    #db = getenv('HBNB_MYSQL_DB')
-    #environment = getenv('HBNB_ENV')
 
-    #reviews = relationship('Place', backref='reviews', cascade='all, delete')
     def __init__(self):
         """ """
         user = getenv('HBNB_MYSQL_USER')
@@ -46,9 +40,6 @@ class DBStorage:
             new_dict = {}
             for item in instances:
                 create_key = "{}.{}".format(cls.__name__, item.id)
-                # if '_sa_instance_state' in item.__dict__.keys():
-                    # del item.__dict__['_sa_instance_state']
-
                 new_dict[create_key] = str(item)
         else:
             models = [User, State, City, Amenity, Place, Review]
@@ -57,12 +48,7 @@ class DBStorage:
                 instances = self.__session.query(model).all()
                 for item in instances:
                     create_key = "{}.{}".format(model.__name__, item.id)
-                    # if '_sa_instance_state' in item.__dict__.keys():
-                        # del item.__dict__['_sa_instance_state']
                     new_dict[create_key] = str(item)
-        # self.__session.close()
-        print (new_dict)
-        exit(0)
         return new_dict
 
     def new(self, obj):
