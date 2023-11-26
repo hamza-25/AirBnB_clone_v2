@@ -5,6 +5,7 @@ import os
 from sqlalchemy import String, Integer, Column, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
@@ -22,6 +23,6 @@ class Place(BaseModel, Base):
     if os.getenv("HBNB_TYPE_STORAGE") == "db":
         city_id = Column (String(128), ForeignKey("cities.id"))
         user_id = Column (String(128), ForeignKey("users.id"))
-        users = relationship('User', backref='places')
-        cities = relationship('City', backref='places')
+        #users = relationship('User', backref='places')
+        #cities = relationship('City', backref='places')
 
