@@ -20,9 +20,14 @@ class Place(BaseModel, Base):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
-    if os.getenv("HBNB_TYPE_STORAGE") == "db":
-        city_id = Column (String(128), ForeignKey("cities.id"))
-        user_id = Column (String(128), ForeignKey("users.id"))
-        #users = relationship('User', backref='places')
-        #cities = relationship('City', backref='places')
-
+    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+        city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
+        user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
+        name = Column(String(128), nullable=False)
+        description = Column(String(1024), nullable=True)
+        number_rooms = Column(Integer, nullable=False, server_default='0')
+        number_bathrooms = Column(Integer, nullable=False, server_default='0')
+        max_guest = Column(Integer, nullable=False, server_default='0')
+        price_by_night = Column(Integer, nullable=False, server_default='0')
+        latitude = Column(Float, nullable=True, server_default='0')
+        longitude = Column(Float, nullable=True, server_default='0')
