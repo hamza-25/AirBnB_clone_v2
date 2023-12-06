@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Bash script that sets up your web servers for the deployment of web_static
-sudo apt update
+sudo apt-get update
 sudo apt install nginx -y
-mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
 echo "hello world!" > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
@@ -19,4 +19,4 @@ echo "server {
         index index.html index.htm;
     }
 }" > /etc/nginx/sites-available/default
-sudo systemctl restart nginx
+sudo service nginx restart
