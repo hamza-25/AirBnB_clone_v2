@@ -8,17 +8,16 @@ mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
 content_html="
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Document</title>
-</head>
-<body>
-    <p>hello world!</p>
-</body>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
 </html>
 "
 echo "$content_html" > /data/web_static/releases/test/index.html
 ln -s /data/web_static/releases/test/ /data/web_static/current
 sudo chown ubuntu:ubuntu /data/
 sudo sed -i '/root \/var\/www\/html;/a\ \ \ \ location \/hbnb_static {\n \ \ \ \ \ \ alias \/data\/web_static\/current\/;\n \ \ \ \ }' /etc/nginx/sites-available/default
+sudo systemctl restart nginx
