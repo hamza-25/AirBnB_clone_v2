@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-""" """
-from fabric.api import run
+"""archive module"""
+from fabric.api import local
 from datetime import datetime
+
+
 def do_pack():
-    """ """
-    run('mkdir -p versions')
-    date = str(datetime.now().strftime("%Y%m%d%H%M%S")) + '.tgz'
-    arc_str = f"tar -czvf {date} web_static"
-    move_file = f"mv ./{date} ./versions"
-    run(arc_str)
-    run(move_file)
-do_pack()
+    """archive files web_static"""
+    local('mkdir -p versions')
+    date = datetime.now().strftime("%Y%m%d%H%M%S")
+    arc_filename = f'versions/web_static_{date}.tgz'
+    arc_str = f'tar -czvf {arc_filename} web_static'
+    local(arc_str)
