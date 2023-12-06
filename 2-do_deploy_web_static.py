@@ -12,11 +12,11 @@ def do_pack(archive_path):
     if os.path.exists(archive_path):
         local('mkdir -p versions')
         date = datetime.now().strftime("%Y%m%d%H%M%S")
-        arc_filename = f'versions/web_static_{date}.tgz'
-        arc_str = f'tar -czvf {arc_filename} web_static'
+        arc_filename = f'{date}.tgz'
+        arc_str = f'tar -czvf versions/{arc_filename} web_static'
         local(arc_str)
         c = Connection(host="ubuntu@100.24.238.196")
-        c.put(arc_filename, '/tmp/' + arc_filename)
+        c.put('versions/' + arc_filename, '/tmp/' + arc_filename)
         c.run('tar -xzvf /tmp/' + arc_filename + '\
                 -C /data/web_static/releases/')
         c.run('rm /tmp/' + arc_filename)
