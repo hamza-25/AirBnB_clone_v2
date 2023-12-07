@@ -10,7 +10,7 @@ env.hosts = ['100.24.238.196', '23.23.74.47']
 
 def do_deploy(archive_path):
     """archive files web_static"""
-    if not os.path.exists(archive_path):
+    if os.path.isfile(archive_path) is False:
         return False
     try:
         file_name = archive_path.split('/')[-1]
