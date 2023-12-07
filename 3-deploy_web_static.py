@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-"""archive module"""
+"""archive module
+"""
+
 from fabric.api import env
 from fabric.api import local
 from fabric.api import run
 from fabric.api import put
 from datetime import datetime
 import os
+
 
 env.hosts = ['100.24.238.196', '23.23.74.47']
 
@@ -47,6 +50,6 @@ def do_deploy(archive_path):
     def deploy():
         """full deploy"""
         archive_path = do_pack()
-        if path_arch is None:
+        if archive_path is None:
             False
         return do_deploy(archive_path)
