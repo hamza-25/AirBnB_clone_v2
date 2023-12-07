@@ -8,6 +8,19 @@ import os
 env.hosts = ['100.24.238.196', '23.23.74.47']
 
 
+def do_pack():
+    """archive files web_static"""
+    try:
+        local('mkdir -p versions')
+        date = datetime.now().strftime("%Y%m%d%H%M%S")
+        arc_filename = f'versions/web_static_{date}.tgz'
+        arc_str = f'tar -czvf {arc_filename} web_static'
+        local(arc_str)
+        return arc_filename
+    except Exception as e:
+        return False
+
+
 def do_deploy(archive_path):
     """archive files web_static"""
     if not os.path.exists(archive_path):
@@ -29,3 +42,9 @@ def do_deploy(archive_path):
         return True
     except Exception as e:
         return False
+
+    def deploy():
+        """full deploy"""
+        path_arch = do_pack()
+        if path_arch:
+            do_deploy(path_arch)
