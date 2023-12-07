@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """archive module"""
-from fabric.api import *
-from datetime import datetime
+from fabric.api import env
+from fabric.api import run
+from fabric.api import put
 import os
 
 
@@ -12,14 +13,10 @@ def do_pack(archive_path):
     if not os.path.exists(archive_path):
         return False
     try:
-        local('mkdir -p versions')
-        date = datetime.now().strftime("%Y%m%d%H%M%S")
-        arc_filename = f'web_static_{date}.tgz'
-        arc_str = f'tar -czvf versions/{arc_filename} web_static'
-        local(arc_str)
-        put('versions/' + arc_filename, '/tmp/' + arc_filename)
-        run(f'tar -xzvf /tmp/{arc_filename} -C /data/web_static/releases/')
-        run(f'rm /tmp/{arc_filename}')
+        file_name = path.split('/')[-1]
+        put(archive_path, f'/tmp/{file_name}')
+        run(f'tar -xzvf /tmp/{file_name} -C /data/web_static/releases/')
+        run(f'rm /tmp/{file_name}')
         c.run('rm -f /data/web_static/current')
         c.run('ln -s /data/web_static/releases/ /data/web_static/current')
         return True
