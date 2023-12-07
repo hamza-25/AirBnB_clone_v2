@@ -17,8 +17,8 @@ def do_pack(archive_path):
         put(archive_path, f'/tmp/{file_name}')
         run(f'tar -xzvf /tmp/{file_name} -C /data/web_static/releases/')
         run(f'rm /tmp/{file_name}')
-        c.run('rm -f /data/web_static/current')
-        c.run('ln -s /data/web_static/releases/ /data/web_static/current')
+        run('rm -f /data/web_static/current')
+        run('ln -s /data/web_static/releases/ /data/web_static/current')
         return True
     except Exception:
         return False
