@@ -22,13 +22,13 @@ def do_pack():
         arc_str = f'tar -czvf {arc_filename} web_static'
         local(arc_str)
         return arc_filename
-    except Exception as e:
+    except Exception:
         return None
 
 
 def do_deploy(archive_path):
     """archive files web_static"""
-    if not os.path.exists(archive_path):
+    if os.path.isfile(archive_path) is False:
         return False
     try:
         file_name = archive_path.split('/')[-1]
@@ -44,12 +44,13 @@ def do_deploy(archive_path):
         run('sudo rm -rf /data/web_static/current')
         run(f'sudo ln -s {r_path} /data/web_static/current')
         return True
-    except BaseException as e:
+    except Exception:
         return False
 
-    def deploy():
-        """full deploy"""
-        archive_path = do_pack()
-        if archive_path is None:
-            False
-        return do_deploy(archive_path)
+
+def deploy():
+    """full deploy"""
+    archive_path = do_pack()
+    if archive_path is None:
+        False
+    return do_deploy(archive_path)
