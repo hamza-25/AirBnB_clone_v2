@@ -4,10 +4,8 @@ from fabric.api import env
 from fabric.api import run
 from fabric.api import put
 import os
-import shlex
 
 env.hosts = ['100.24.238.196', '23.23.74.47']
-env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
