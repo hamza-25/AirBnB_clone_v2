@@ -19,8 +19,6 @@ def do_deploy(archive_path):
         w_file_name = file_name.split('.')[0]
         r_path = f'/data/web_static/releases/{w_file_name}/'
         tmp_path = f'/tmp/{file_name}'
-        print(r_path)
-        print(tmp_path)
         put(archive_path, '/tmp/')
         run(f'mkdir -p {r_path}')
         run(f'tar -xzf {tmp_path} -C {r_path}')
@@ -31,5 +29,6 @@ def do_deploy(archive_path):
         run(f'ln -s {r_path} /data/web_static/current')
         print("New version deployed!")
         return True
-    except Exception:
+    except Exception as e:
+        print(f"Error deploying: {str(e)}")
         return False
