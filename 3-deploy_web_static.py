@@ -18,7 +18,7 @@ def do_pack():
         local(arc_str)
         return arc_filename
     except Exception as e:
-        return False
+        return None
 
 
 def do_deploy(archive_path):
@@ -46,5 +46,6 @@ def do_deploy(archive_path):
     def deploy():
         """full deploy"""
         path_arch = do_pack()
-        if path_arch:
-            do_deploy(path_arch)
+        if path_arch is None:
+            False
+        return do_deploy(path_arch)
