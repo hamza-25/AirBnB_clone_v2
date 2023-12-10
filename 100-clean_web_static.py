@@ -18,4 +18,4 @@ def do_clean(number=0):
         number = number + 1
     local(f'cd versions; ls -t | tail -n +{number} | xargs rm -rf')
     path = '/data/web_static/releases'
-    local(f'cd {path}; ls -t | tail -n +{number} | xargs rm -rf')
+    run(f'cd {path}; ls -t | tail -n +{number} | xargs rm -rf')
