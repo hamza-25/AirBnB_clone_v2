@@ -12,10 +12,10 @@ def do_clean(number=0):
     """delete all unnecessary archive"""
 
     number = int(number)
-    if number == 0:
+    if number == 0 or number == 1:
         number = 2
     else:
-        number += 1
+        number = number + 1
     local(f'cd versions; ls -t | tail -n +{number} | xargs rm -rf')
     path = '/data/web_static/releases'
     local(f'cd {path}; ls -t | tail -n +{number} | xargs rm -rf')
