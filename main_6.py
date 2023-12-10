@@ -20,7 +20,7 @@ if os.path.exists(file_path):
     os.remove(file_path)
 
 """
- Backup console file
+ Backup console file.
 """
 if os.path.exists("tmp_console_main.py"):
     shutil.copy("tmp_console_main.py", "console.py")
