@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """define route module"""
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 @app.route('/', strict_slashes=False)
@@ -24,5 +24,9 @@ def python_is_fun(text="is_cool"):
 def number(n):
     return f"{n} is a number"
 
+@app.route('/number_template/<int:n>', strict_slashes=False)
+def number_template(n):
+    return render_template('5-number.html', string=f"Number: {n}")
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
