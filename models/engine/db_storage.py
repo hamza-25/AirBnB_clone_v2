@@ -33,23 +33,34 @@ class DBStorage:
 
     def all(self, cls=None):
         """ """
-        if cls:
-            if isinstance(cls, str):
-                cls = eval(cls)
-            instances = self.__session.query(cls).all()
-            new_dict = {}
-            for item in instances:
-                create_key = "{}.{}".format(cls.__name__, item.id)
-                new_dict[create_key] = str(item)
+        # if cls:
+        #     if isinstance(cls, str):
+        #         cls = eval(cls)
+        #     instances = self.__session.query(cls).all()
+        #     new_dict = {}
+        #     for item in instances:
+        #         create_key = "{}.{}".format(cls.__name__, item.id)
+        #         new_dict[create_key] = str(item)
+        # else:
+        #     models = [User, State, City, Amenity, Place, Review]
+        #     new_dict = {}
+        #     for model in models:
+        #         instances = self.__session.query(model).all()
+        #         for item in instances:
+        #             create_key = "{}.{}".format(model.__name__, item.id)
+        #             new_dict[create_key] = str(item)
+        # return new_dict
+        if not cls:
+            data_list = self.__session.query(Amenity)
+            data_list.extend(self.__session.query(City))
+            data_list.extend(self.__session.query(Place))
+            data_list.extend(self.__session.query(Review))
+            data_list.extend(self.__session.query(State))
+            data_list.extend(self.__session.query(User))
         else:
-            models = [User, State, City, Amenity, Place, Review]
-            new_dict = {}
-            for model in models:
-                instances = self.__session.query(model).all()
-                for item in instances:
-                    create_key = "{}.{}".format(model.__name__, item.id)
-                    new_dict[create_key] = str(item)
-        return new_dict
+            data_list = self.__session.query(cls)
+        return {'{}.{}'.format(type(obj).__name__, obj.id): obj
+                for obj in data_list}
 
     def new(self, obj):
         """ """
