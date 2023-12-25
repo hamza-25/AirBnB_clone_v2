@@ -25,11 +25,11 @@ def states_id(id):
     for state in states:
         if id == state.id:
             state_id = state
-            id = True
+            id_check = True
             break
-        state_id = None
-        id = False
-    return render_template('9-states.html', id=id, state=state_id)
+        id_check = False
+        state_id = False
+    return render_template('9-states.html', id=id_check, state=state_id)
 
 
 if __name__ == '__main__':
