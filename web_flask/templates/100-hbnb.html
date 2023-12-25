@@ -4,11 +4,11 @@
 		<title>AirBnB clone</title>
 
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.ico') }}" >
-
 		<link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}"/>
 
 	</head>
     <body>
@@ -20,8 +20,8 @@
 				<button>Search</button>
 				<div class="locations">
 					<h3>States</h3>
-                    &nbsp;
 					<!-- <h4>California, Arizona...</h4> -->
+                    &nbsp;
 					<ul class="popover">
 						<li>
                             {% for state in states %}
@@ -45,6 +45,36 @@
 						{% endfor %}
 					</ul>
 				</div>
+
+			</section>
+			<section class="places">
+				<h1>Places</h1>
+				{% for place in places %}
+					<article>
+						<div class="headline">
+							<h2>{{ place.name }}</h2>
+							<div class="price_by_night">${{ place.price_by_night }}</div>
+						</div>
+						<div class="information">
+							<div class="max_guest">
+								<div class="guest_icon"></div>
+								<p>{{ place.max_guest }} Guests</p>
+							</div>
+							<div class="number_rooms">
+								<div class="bed_icon"></div>
+								<p>{{ place.number_rooms }} Bedroom</p>
+							</div>
+							 <div class="number_bathrooms">
+								<div class="bath_icon"></div>
+								<p>{{ place.number_bathrooms }} Bathroom</p>
+							</div>
+						</div>
+						<div class="user"><b>Owner</b>: John Lennon</div>
+						<div class="description">
+							{{ place.description }}
+                	    </div>
+					</article>
+				{% endfor %}
 			</section>
 		</div>
 		<footer>
