@@ -25,6 +25,10 @@ def states_id(id):
     for state in states:
         if id == state.id:
             state_id = state
+            id = True
+            break
+        state_id = None
+        id = False
     return render_template('9-states.html', id=id, state=state_id)
 
 
